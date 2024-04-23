@@ -12,7 +12,7 @@ import { Header } from "./components/header/Header";
 
 function App() {
   const dispatch = useDispatch();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {

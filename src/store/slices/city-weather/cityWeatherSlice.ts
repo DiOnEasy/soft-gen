@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { WeatherData } from "./city-weather.interface";
-
-
+import { ForecastData, WeatherData } from "./city-weather.interface";
 
 export const fetchWeatherByCityId = createAsyncThunk(
   "weather/fetchWeatherByCityId",
@@ -10,20 +8,28 @@ export const fetchWeatherByCityId = createAsyncThunk(
     try {
       const apiKey = "08eef4b90074e6d38726f67dca0722f3"; // Замените 'your_api_key' на ваш API-ключ
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&units=metric&appid=${apiKey}`,
       );
+      console.log(response);
       const data: WeatherData = {
-        city: response.data.name,
-        temperature: response.data.main.temp,
-        weatherDescription: response.data.weather[0].description,
-        icon: response.data.weather[0].icon,
-        humidity: response.data.main.humidity,
-        windSpeed: response.data.wind.speed,
-        pressure: response.data.main.pressure,
-        visibility: response.data.visibility,
-        sunrise: response.data.sys.sunrise,
-        sunset: response.data.sys.sunset,
+        city: response.data.city.name,
+        temperature: response.data.list[0].main.temp,
+        weatherDescription: response.data.list[0].weather[0].description,
+        icon: response.data.list[0].weather[0].icon,
+        humidity: response.data.list[0].main.humidity,
+        windSpeed: response.data.list[0].wind.speed,
+        pressure: response.data.list[0].main.pressure,
+        visibility: response.data.list[0].visibility,
+        sunrise: response.data.city.sunrise,
+        sunset: response.data.city.sunset,
+        fiveDaysForecast: response.data.list.map((item: any) => ({
+          dateTime: item.dt,
+          temperature: item.main.temp,
+          weatherDescription: item.weather[0].description,
+          icon: item.weather[0].icon,
+        })) as ForecastData[], 
       };
+      console.log(data);
       return data;
     } catch (error) {
       throw error;
