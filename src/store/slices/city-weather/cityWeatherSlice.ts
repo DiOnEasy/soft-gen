@@ -10,7 +10,7 @@ export const fetchWeatherByCityId = createAsyncThunk(
     try {
       const apiKey = "08eef4b90074e6d38726f67dca0722f3"; // Замените 'your_api_key' на ваш API-ключ
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${apiKey}`,
       );
       const data: WeatherData = {
         city: response.data.name,

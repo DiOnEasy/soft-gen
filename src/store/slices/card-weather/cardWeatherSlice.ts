@@ -36,7 +36,7 @@ export const fetchWeather = createAsyncThunk(
   async (cityIds: number[]) => {
     try {
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/group?id=${cityIds.join(",")}&units=metric&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/group?id=${cityIds.join(",")}&units=metric&appid=${apiKey}`,
       );
       const weatherData: Weather[] = response.data.list.map(
         (cityData: any) => ({
@@ -59,7 +59,7 @@ export const fetchWeatherByCityName = createAsyncThunk(
   async (cityName: string) => {
     try {
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`,
       );
       const cityWeather: Weather = {
         city: response.data.name,
@@ -122,7 +122,7 @@ export const updateCityWeather = createAsyncThunk(
   async (cityId: number) => {
     try {
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${apiKey}`,
+        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&units=metric&appid=${apiKey}`,
       );
       const cityWeather: Weather = {
         city: response.data.name,
