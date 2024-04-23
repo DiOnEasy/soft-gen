@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInWithGoogle } from "./store/slices/user/userSlice";
 import { Action } from "@reduxjs/toolkit";
 import { RootState } from "./store/store";
+import { Header } from "./components/header/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
   };
   return (
     <div className="App">
+      <Header />
       <Router>
         <Routes>
           {isAuthenticated ? (

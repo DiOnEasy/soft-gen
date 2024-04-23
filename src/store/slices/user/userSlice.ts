@@ -36,6 +36,7 @@ export const signInWithGoogle = createAsyncThunk(
     const userDocSnap = await getDoc(userDocRef);
     const userData = userDocSnap.data();
     localStorage.setItem("userId", result.user.uid);
+    console.log(result.user)
     return { user: result.user, userData };
   },
 );
