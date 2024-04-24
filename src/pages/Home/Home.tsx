@@ -12,9 +12,10 @@ import {
 import { Action } from "@reduxjs/toolkit";
 import { Grid } from "@mui/material";
 
+
 export const Home: React.FC = () => {
   const [isInitialFetch, setIsInitialFetch] = useState(true);
-  const { userData,  } = useSelector((state: RootState) => state.auth);
+  const { userData } = useSelector((state: RootState) => state.auth);
 
   const onSearch = (name: string) => {
     dispatch(fetchWeatherByCityName(name) as unknown as Action);
@@ -36,14 +37,19 @@ export const Home: React.FC = () => {
       console.error("Error fetching weather data:", error);
     }
   }, [loading, error, weatherData]);
-console.log(weatherData)
+  console.log(weatherData);
   return (
     <div>
       <SearchWeatherField onSearch={onSearch} />
       {loading && isInitialFetch ? (
         <div>loading data...</div>
       ) : (
-        <Grid container padding={1} alignItems={"center"} justifyContent={"space-around"}>
+        <Grid
+          container
+          padding={1}
+          alignItems={"center"}
+          justifyContent={"space-around"}
+        >
           {weatherData?.map((data) => (
             <Grid item md={4} xs={12}>
               <CityWeatherCard

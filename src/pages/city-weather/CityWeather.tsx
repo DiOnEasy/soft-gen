@@ -58,9 +58,9 @@ export const CityWeather: React.FC = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h4">
-                Today - {' '}
+                Today -{" "}
                 {new Date(
-                  weatherData.fiveDaysForecast[0].dateTime * 1000,
+                  (weatherData.fiveDaysForecast[0].dateTime - 1) * 1000,
                 ).toLocaleDateString()}
                 °C
               </Typography>
@@ -116,7 +116,7 @@ export const CityWeather: React.FC = () => {
                           <Typography variant="body2" component="p">
                             Date:{" "}
                             {new Date(
-                              item.dateTime * 1000,
+                              (item.dateTime - 1) * 1000,
                             ).toLocaleDateString()}
                           </Typography>
                           <Typography variant="body2" component="p">
